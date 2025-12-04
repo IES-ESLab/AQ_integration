@@ -81,7 +81,7 @@
                                             "description": "初動解: + (up), - (down), x (not-determined)"
                                         }
                                     },
-                                    "required": ["phase_time", "phase_score"]
+                                    "required": ["phase_time", "phase_score", "polarity"]
                                 },
                                 "S": {
                                     "type": "object",
@@ -107,7 +107,7 @@
                     "additionalProperties": false
                 }
             },
-            "required": ["event_id", "event_time", "longitude", "latitude", "depth_km", "associated_picks"]
+            "required": ["event_id", "event_time", "longitude", "latitude", "depth_km", "num_picks", "num_p_picks", "num_s_picks", "associated_picks"]
         },
         "update_location": {
             "type": "object",
@@ -172,7 +172,7 @@
                                             "description": "測站規模"
                                         }
                                     },
-                                    "required": ["distance_km", "azimuth", "takeoff_angle"]
+                                    "required": ["distance_km", "azimuth", "takeoff_angle", "magnitude"]
                                 },
                                 "S": {
                                     "type": "object",
@@ -200,7 +200,7 @@
                                             "description": "測站規模"
                                         }
                                     },
-                                    "required": ["distance_km", "azimuth", "takeoff_angle"]
+                                    "required": ["distance_km", "azimuth", "takeoff_angle", "magnitude"]
                                 }
                             },
                             "additionalProperties": false
@@ -264,7 +264,7 @@
                     "description": "用了多少Polarity"
                 }
             },
-            "required": ["event_id", "strike", "dip", "rake"]
+            "required": ["event_id", "strike", "strike_err", "dip", "dip_err", "rake", "rake_err", "quality_index", "num_of_polarity"]
         }
     }
 }
