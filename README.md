@@ -30,35 +30,35 @@
 
 #### 欄位說明
 
-| 欄位名稱 | 類型 | 必填 | 說明 |
-|---------|------|------|------|
-| `event_id` | integer | ✅ | 地震事件的 index |
-| `event_time` | string | ✅ | 地震發生時間（例如：2024-04-09T12:06:22.763） |
-| `longitude` | number | ✅ | 經度（-180 ~ 180） |
-| `latitude` | number | ✅ | 緯度（-90 ~ 90） |
-| `depth_km` | number | ✅ | 震源深度（公里，≥ 0） |
-| `magnitude` | number/null | ❌ | 地震規模，初始為 null |
-| `num_picks` | integer | ❌ | 挑到的 Picks 總數 |
-| `num_p_picks` | integer | ❌ | P 波挑到的數量 |
-| `num_s_picks` | integer | ❌ | S 波挑到的數量 |
-| `associated_picks` | object | ✅ | 被挑到的波相的詳細資訊 (pfile) |
+| 欄位名稱 | 類型 | 說明 |
+|---------|------|------|
+| `event_id` | integer | 地震事件的 index |
+| `event_time` | string | 地震發生時間（例如：2024-04-09T12:06:22.763） |
+| `longitude` | number | 經度（-180 ~ 180） |
+| `latitude` | number | 緯度（-90 ~ 90） |
+| `depth_km` | number | 震源深度（公里，≥ 0） |
+| `magnitude` | number/null | 地震規模，初始為 null |
+| `num_picks` | integer | 挑到的 Picks 總數 |
+| `num_p_picks` | integer | P 波挑到的數量 |
+| `num_s_picks` | integer | S 波挑到的數量 |
+| `associated_picks` | object | 被挑到的波相的詳細資訊 (pfile) |
 
 #### associated_picks 結構
 
 每個測站（例如：SHUL、B138）可包含 P 波和/或 S 波資料：
 
 **P 波欄位：**
-| 欄位 | 類型 | 必填 | 說明 |
-|------|------|------|------|
-| `phase_time` | string | ✅ | 波相到時 |
-| `phase_score` | number | ✅ | 波相分數 (probability) |
-| `polarity` | string | ❌ | 初動極性：`+`(up)、`-`(down)、`x`(not-determined) |
+| 欄位 | 類型 | 說明 |
+|------|------|------|
+| `phase_time` | string | 波相到時 |
+| `phase_score` | number | 波相分數 (probability) |
+| `polarity` | string | 初動極性：`+`(up)、`-`(down)、`x`(not-determined) |
 
 **S 波欄位：**
-| 欄位 | 類型 | 必填 | 說明 |
-|------|------|------|------|
-| `phase_time` | string | ✅ | 波相到時 |
-| `phase_score` | number | ✅ | 波相分數 (probability) |
+| 欄位 | 類型 | 說明 |
+|------|------|------|
+| `phase_time` | string | 波相到時 |
+| `phase_score` | number | 波相分數 (probability) |
 
 **注意：** 測站可以只有 P 波、只有 S 波，或兩者都有。
 
@@ -121,24 +121,24 @@
 
 #### 欄位說明
 
-| 欄位名稱 | 類型 | 必填 | 說明 |
-|---------|------|------|------|
-| `event_id` | integer | ✅ | 地震事件的 index |
-| `longitude` | number | ✅ | 經度（-180 ~ 180） |
-| `latitude` | number | ✅ | 緯度（-90 ~ 90） |
-| `depth_km` | number | ✅ | 震源深度（公里，≥ 0） |
-| `magnitude` | number | ✅ | 地震規模 |
-| `associated_picks` | object | ✅ | 關聯的測站波相資料（含距離與方位角資訊） |
+| 欄位名稱 | 類型 | 說明 |
+|---------|------|------|
+| `event_id` | integer | 地震事件的 index |
+| `longitude` | number | 經度（-180 ~ 180） |
+| `latitude` | number | 緯度（-90 ~ 90） |
+| `depth_km` | number | 震源深度（公里，≥ 0） |
+| `magnitude` | number | 地震規模 |
+| `associated_picks` | object | 關聯的測站波相資料（含距離與方位角資訊） |
 
 #### associated_picks 結構（update_location）
 
 **P 波和 S 波共同欄位：**
-| 欄位 | 類型 | 必填 | 說明 |
-|------|------|------|------|
-| `distance_km` | number | ✅ | 震央距離（公里，≥ 0） |
-| `azimuth` | number | ✅ | 方位角（0 ~ 360） |
-| `takeoff_angle` | number | ✅ | 出射角（0 ~ 180） |
-| `magnitude` | number | ❌ | 測站規模 |
+| 欄位 | 類型 | 說明 |
+|------|------|------|
+| `distance_km` | number | 震央距離（公里，≥ 0） |
+| `azimuth` | number | 方位角（0 ~ 360） |
+| `takeoff_angle` | number | 出射角（0 ~ 180） |
+| `magnitude` | number | 測站規模 |
 
 #### 範例
 
@@ -186,17 +186,17 @@
 
 #### 欄位說明
 
-| 欄位名稱 | 類型 | 必填 | 說明 |
-|---------|------|------|------|
-| `event_id` | integer | ✅ | 地震事件的 index |
-| `strike` | number | ✅ | 走向（度，0 ~ 360） |
-| `strike_err` | number | ❌ | 走向誤差（度，≥ 0） |
-| `dip` | number | ✅ | 傾角（度，0 ~ 90） |
-| `dip_err` | number | ❌ | 傾角誤差（度，≥ 0） |
-| `rake` | number | ✅ | 滑移角（度，-180 ~ 180） |
-| `rake_err` | number | ❌ | 滑移角誤差（度，≥ 0） |
-| `quality_index` | integer | ❌ | Quality Index provided by [Wu et al., 2008](https://pubs.geoscienceworld.org/ssa/bssa/article/98/2/651/350113/Focal-Mechanism-Determination-in-Taiwan-by-Genetic) |
-| `num_of_polarity` | integer | ❌ | 使用的極性數量 |
+| 欄位名稱 | 類型 | 說明 |
+|---------|------|------|
+| `event_id` | integer | 地震事件的 index |
+| `strike` | number | 走向（度，0 ~ 360） |
+| `strike_err` | number | 走向誤差（度，≥ 0） |
+| `dip` | number | 傾角（度，0 ~ 90） |
+| `dip_err` | number | 傾角誤差（度，≥ 0） |
+| `rake` | number | 滑移角（度，-180 ~ 180） |
+| `rake_err` | number | 滑移角誤差（度，≥ 0） |
+| `quality_index` | integer | Quality Index provided by [Wu et al., 2008](https://pubs.geoscienceworld.org/ssa/bssa/article/98/2/651/350113/Focal-Mechanism-Determination-in-Taiwan-by-Genetic) |
+| `num_of_polarity` | integer | 使用的極性數量 |
 
 #### 範例
 
