@@ -1,0 +1,97 @@
+{
+    "$schema": "./message.schema.json",
+    "add_event":{
+        "event_id": 123,
+        "event_time": "2024-04-09T12:06:22.763",
+        "longitude": 121.51,
+        "latitude": 23.756,
+        "depth_km": 3.932,
+        "magnitude": null,
+        "num_picks": 15,
+        "num_p_picks": 10,
+        "num_s_picks": 5,
+        "associated_picks": {
+            "SHUL":{
+                "P": {
+                    "phase_time": "2024-04-09T12:06:24.280000",
+                    "phase_score": 0.914,
+                    "polarity": "+"
+                },
+                "S": {
+                    "phase_time": "2024-04-09T12:06:25.800000",
+                    "phase_score": 0.816
+                }
+            },
+            "B138":{
+                "P": {
+                    "phase_time": "2024-04-09T12:06:40.730000",
+                    "phase_score": 0.782,
+                    "polarity": "-"
+                }
+            },
+            "EGC":{
+                "P": {
+                    "phase_time": "2024-04-09T12:06:41.730000",
+                    "phase_score": 0.782,
+                    "polarity": "x"
+                }
+            },
+            "WPL":{
+                "S": {
+                    "phase_time": "2024-04-09T12:06:42.770000",
+                    "phase_score": 0.365
+                }
+            }
+        }
+    },
+    "update_location":{
+        "event_id": 123,
+        "longitude": 121.512,
+        "latitude": 23.758,
+        "depth_km": 4.1,
+        "magnitude": 2.5,
+        "associated_picks": {
+            "SHUL":{
+                "P": {
+                    "distance_km": 4.0,
+                    "azimuth": 43,
+                    "takeoff_angle": 139,
+                    "magnitude": 0.710143
+                },
+                "S": {
+                    "distance_km": 4.5,
+                    "azimuth": 45,
+                    "takeoff_angle": 140,
+                    "magnitude": 0.816
+                }
+            },
+            "B138":{
+                "P": {
+                    "distance_km": 4.0,
+                    "azimuth": 43,
+                    "takeoff_angle": 139,
+                    "magnitude": 0.710143
+                }
+            },
+            "WPL":{
+                "S": {
+                    "distance_km": 4.5,
+                    "azimuth": 45,
+                    "takeoff_angle": 140,
+                    "magnitude": 0.365
+                }
+            }
+        }
+    },
+    "update_focal":{
+        "event_id": 123,
+        "strike": 120,
+        "strike_err": 5,
+        "dip": 30,
+        "dip_err": 3,
+        "rake": -90,
+        "rake_err": 7,
+        "quality_index": 2,
+        "num_of_polarity": 10
+    }
+}

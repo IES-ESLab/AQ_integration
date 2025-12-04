@@ -1,0 +1,270 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://example.com/earthquake-message.schema.json",
+    "title": "Earthquake Event Message",
+    "description": "地震事件資料交換格式, 包含事件新增, 位置更新和震源機制更新",
+    "type": "object",
+    "properties": {
+        "add_event": {
+            "type": "object",
+            "description": "新增地震事件",
+            "properties": {
+                "event_id": {
+                    "type": "integer",
+                    "description": "地震事件的index"
+                },
+                "event_time": {
+                    "type": "string",
+                    "description": "地震發生時間"
+                },
+                "longitude": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180,
+                    "description": "經度"
+                },
+                "latitude": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90,
+                    "description": "緯度"
+                },
+                "depth_km": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "震源深度（公里）"
+                },
+                "magnitude": {
+                    "type": ["number", "null"],
+                    "description": "地震規模, 初始為null"
+                },
+                "num_picks": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "挑到的Picks總數"
+                },
+                "num_p_picks": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "P 波挑到的數量"
+                },
+                "num_s_picks": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "S 波挑到的數量"
+                },
+                "associated_picks": {
+                    "type": "object",
+                    "description": "關聯的測站波相資料 (pfile)",
+                    "patternProperties": {
+                        "^[A-Z0-9]+$": {
+                            "type": "object",
+                            "description": "測站代碼",
+                            "properties": {
+                                "P": {
+                                    "type": "object",
+                                    "description": "P 波資料",
+                                    "properties": {
+                                        "phase_time": {
+                                            "type": "string",
+                                            "description": "波相到時"
+                                        },
+                                        "phase_score": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1,
+                                            "description": "波相分數 (probability)"
+                                        },
+                                        "polarity": {
+                                            "type": "string",
+                                            "enum": ["+", "-", "x"],
+                                            "description": "初動解: + (up), - (down), x (not-determined)"
+                                        }
+                                    },
+                                    "required": ["phase_time", "phase_score"]
+                                },
+                                "S": {
+                                    "type": "object",
+                                    "description": "S 波資料",
+                                    "properties": {
+                                        "phase_time": {
+                                            "type": "string",
+                                            "description": "波相到時"
+                                        },
+                                        "phase_score": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1,
+                                            "description": "波相分數 (probability)"
+                                        }
+                                    },
+                                    "required": ["phase_time", "phase_score"]
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "required": ["event_id", "event_time", "longitude", "latitude", "depth_km", "associated_picks"]
+        },
+        "update_location": {
+            "type": "object",
+            "description": "更新地震事件位置資訊",
+            "properties": {
+                "event_id": {
+                    "type": "integer",
+                    "description": "地震事件的index"
+                },
+                "longitude": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180,
+                    "description": "經度"
+                },
+                "latitude": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90,
+                    "description": "緯度"
+                },
+                "depth_km": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "震源深度（公里）"
+                },
+                "magnitude": {
+                    "type": "number",
+                    "description": "地震規模"
+                },
+                "associated_picks": {
+                    "type": "object",
+                    "description": "關聯的測站波相資料（含距離與方位角資訊）",
+                    "patternProperties": {
+                        "^[A-Z0-9]+$": {
+                            "type": "object",
+                            "description": "測站代碼",
+                            "properties": {
+                                "P": {
+                                    "type": "object",
+                                    "description": "P 波資料",
+                                    "properties": {
+                                        "distance_km": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "description": "震央距離（公里）"
+                                        },
+                                        "azimuth": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 360,
+                                            "description": "方位角"
+                                        },
+                                        "takeoff_angle": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 180,
+                                            "description": "出射角"
+                                        },
+                                        "magnitude": {
+                                            "type": "number",
+                                            "description": "測站規模"
+                                        }
+                                    },
+                                    "required": ["distance_km", "azimuth", "takeoff_angle"]
+                                },
+                                "S": {
+                                    "type": "object",
+                                    "description": "S 波資料",
+                                    "properties": {
+                                        "distance_km": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "description": "震央距離（公里）"
+                                        },
+                                        "azimuth": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 360,
+                                            "description": "方位角"
+                                        },
+                                        "takeoff_angle": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 180,
+                                            "description": "出射角"
+                                        },
+                                        "magnitude": {
+                                            "type": "number",
+                                            "description": "測站規模"
+                                        }
+                                    },
+                                    "required": ["distance_km", "azimuth", "takeoff_angle"]
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "required": ["event_id", "longitude", "latitude", "depth_km", "magnitude", "associated_picks"]
+        },
+        "update_focal": {
+            "type": "object",
+            "description": "更新震源機制解",
+            "properties": {
+                "event_id": {
+                    "type": "integer",
+                    "description": "地震事件的index"
+                },
+                "strike": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 360,
+                    "description": "走向"
+                },
+                "strike_err": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "走向誤差"
+                },
+                "dip": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 90,
+                    "description": "傾角"
+                },
+                "dip_err": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "傾角誤差"
+                },
+                "rake": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180,
+                    "description": "滑移角"
+                },
+                "rake_err": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "滑移角誤差"
+                },
+                "quality_index": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "description": "品質指標 (Provided by GAFocal's paper: Wu et al., 2008)"
+                },
+                "num_of_polarity": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "用了多少Polarity"
+                }
+            },
+            "required": ["event_id", "strike", "dip", "rake"]
+        }
+    }
+}
