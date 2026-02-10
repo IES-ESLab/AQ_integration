@@ -254,4 +254,4 @@ python test_push_server.py
 python test_client.py
 ```
 
-> 訊息內容/欄位定義請參考下方「資料結構說明」，Server 推送的訊息類型包含 (我之後可能還會加一些其他的action對應不同的scenario，但這些是最基本的)：`add_event`、`update_location`、`update_focal`。
+> 訊息內容/欄位定義請看「資料結構說明」那邊，Server 推送的訊息類型包含 (我之後可能還會加一些其他的action對應不同的scenario，但這些是最基本的)：`add_event`、`update_location`、`update_focal`。
