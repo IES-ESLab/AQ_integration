@@ -14,15 +14,12 @@ import json
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
-from typing import Optional
 import argparse
 
-try:
-    import websockets
-    from websockets.server import serve
-except ImportError:
-    print("請安裝 websockets: pip install websockets")
-    exit(1)
+
+import websockets
+from websockets.server import serve
+
 
 
 class EarthquakePushServer:
