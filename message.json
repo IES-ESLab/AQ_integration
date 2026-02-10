@@ -59,10 +59,10 @@
                     "magnitude": 0.710143
                 },
                 "S": {
-                    "distance_km": 4.5,
-                    "azimuth": 45,
+                    "distance_km": 4.0,
+                    "azimuth": 43,
                     "takeoff_angle": 140,
-                    "magnitude": 0.816
+                    "magnitude": 0.710143
                 }
             },
             "B138":{
