@@ -10,46 +10,6 @@
 
 ---
 
-## 🧪 即時推送測試工具（UI 模擬用）
-
-為了讓 WebUI 團隊能在尚未接上真實即時管線前，先行開發/測試前端顯示與訊息處理流程，本 repo 提供兩支 Python script 來**模擬即時資料輸入**：
-
-- `test_push_server.py`：WebSocket 推送端（Server），讀取 CSV 後依序推送事件訊息。
-- `test_client.py`：WebSocket 接收端（Client），連線到 Server 並顯示收到的 JSON。
-
-### 測試資料位置
-
-兩支 script 使用的範例資料放在：
-
-- `example_csv/events.csv`
-- `example_csv/picks.csv`
-
-### 需求套件
-
-請先安裝相依套件（依實作可能會用到 `pandas` / `websockets`）：
-
-```bash
-pip install pandas websockets
-```
-
-### 使用方式（兩個終端機）
-
-1) 啟動推送 Server：
-
-```bash
-python test_push_server.py
-```
-
-2) 啟動 Client 連線接收（預設連 `ws://localhost:8765`，若腳本內有不同設定請以腳本為準）：
-
-```bash
-python test_client.py
-```
-
-> 訊息內容/欄位定義請參考下方「資料結構說明」，Server 推送的訊息類型包含 (我之後可能還會加一些其他的action對應不同的scenario，但這些是最基本的)：`add_event`、`update_location`、`update_focal`。
-
----
-
 ## 訊息類型
 
 系統支援三種訊息類型：
@@ -255,3 +215,43 @@ python test_client.py
     }
 }
 ```
+
+---
+
+## 🧪 即時推送測試工具（UI 模擬用）
+
+為了讓 WebUI 團隊能在尚未接上真實即時管線前，先行開發/測試前端顯示與訊息處理流程，本 repo 提供兩支 Python script 來**模擬即時資料輸入**：
+
+- `test_push_server.py`：WebSocket 推送端（Server），讀取 CSV 後依序推送事件訊息。
+- `test_client.py`：WebSocket 接收端（Client），連線到 Server 並顯示收到的 JSON。
+
+### 測試資料位置
+
+兩支 script 使用的範例資料放在：
+
+- `example_csv/events.csv`
+- `example_csv/picks.csv`
+
+### 需求套件
+
+請先安裝相依套件（依實作可能會用到 `pandas` / `websockets`）：
+
+```bash
+pip install pandas websockets
+```
+
+### 使用方式（兩個終端機）
+
+1) 啟動推送 Server：
+
+```bash
+python test_push_server.py
+```
+
+2) 啟動 Client 連線接收（預設連 `ws://localhost:8765`，若腳本內有不同設定請以腳本為準）：
+
+```bash
+python test_client.py
+```
+
+> 訊息內容/欄位定義請參考下方「資料結構說明」，Server 推送的訊息類型包含 (我之後可能還會加一些其他的action對應不同的scenario，但這些是最基本的)：`add_event`、`update_location`、`update_focal`。
